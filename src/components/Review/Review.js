@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import fakeData from '../../fakeData';
 import { getDatabaseCart, processOrder, removeFromDatabaseCart } from '../../utilities/databaseManager';
 import Cart from '../Cart/Cart';
@@ -7,9 +8,9 @@ import './Review.css'
 
 const Review = () => {
     const [cart, setCart] = useState([]);
-    const handlePlaceOrder =() =>{
-        setCart([]);
-        processOrder();
+    const history = useHistory();
+    const handleProceedCheckOut =() =>{
+       history.push('/shipment');
     }
     const removeProduct = (productKey)=>{
         console.log("remove clicked",productKey);
@@ -38,7 +39,7 @@ const Review = () => {
             </div>
             <div className={"cart-container"}>
                 <Cart cart={cart}>
-                <button onClick={handlePlaceOrder} className="main-button">Place Order</button>
+                <button onClick={handleProceedCheckOut} className="main-button">CheckOut</button>
                 </Cart>
             </div>
         </div>

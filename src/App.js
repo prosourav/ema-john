@@ -7,9 +7,18 @@ import Review from './components/Review/Review';
 import Inventory from './components/Inventory/Inventory';
 import Nomatch from './components/Nomatch/Nomatch';
 import ProductDetail from './components/ProductDetail/ProductDetail';
-function App() {
+import Shipment from './components/Shipment/Shipment';
+import Login from './components/Login/Login';
+import { createContext, useState } from 'react';
+
+
+export const UserContext = createContext();
+
+function App(props) {
+  const [loggedInUser,setLoggedInUser] = useState({})
   return (
-    <div>
+    <UserContext.Provider value={[loggedInUser,setLoggedInUser]}>
+    <h3>loggedIn User email: {loggedInUser.email}</h3>
     <Header></Header>
     <Router>
       <Switch>
@@ -25,6 +34,14 @@ function App() {
        <Route path='/manage'>
         <Inventory></Inventory>
        </Route>
+
+       <Route path='/shipment'>
+        <Shipment></Shipment>
+       </Route>
+
+       <Route path='/login'>
+       <Login></Login>
+      </Route>
 
        <Route exact path='/'>
          <Shop></Shop>
@@ -42,7 +59,7 @@ function App() {
     </Router>
  
 
-    </div>
+    </UserContext.Provider>
   );
 }
 
